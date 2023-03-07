@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/web/public/fonts/SFPRODISPLAYREGULAR.OTF") format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  font-family: "SF Pro Display", sans-serif;
+  background-color: #fbfbfb;
+}
