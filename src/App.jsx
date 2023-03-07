@@ -5,7 +5,7 @@ import { FiSearch, FiSun, FiMoon } from "react-icons/fi";
 import { useEffect, useState } from "react";
 
 function App() {
-  const API_KEY = "119d0d9a233ef2bd01084eacf4006edc";
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const [inputSearch, setInputSearch] = useState("");
   const [weather, setWeather] = useState(null);
   const [btnState, setBtnState] = useState(true);
