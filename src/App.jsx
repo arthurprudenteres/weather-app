@@ -5,12 +5,30 @@ import MainCard from "./components/MainCard";
 import { FiSearch, FiSun, FiMoon } from "react-icons/fi";
 import { useEffect, useState } from "react";
 
+const API_KEY = "119d0d9a233ef2bd01084eacf4006edc";
+
+const formatDate = (date) => {
+  const options = {
+    weekday: "long",
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "numeric",
+  };
+  return new Intl.DateTimeFormat("pt-BR", options).format(date);
+};
+
 function App() {
-  const API_KEY = "119d0d9a233ef2bd01084eacf4006edc";
   const [inputSearch, setInputSearch] = useState("");
   const [weather, setWeather] = useState(null);
   const [btnState, setBtnState] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  const updateTime = () => {
+    setCurrentTime(new Date());
+  };
 
   const handleInput = (e) => {
     setInputSearch(e.target.value);
@@ -23,7 +41,9 @@ function App() {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputSearch}&appid=${API_KEY}&units=metric`;
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setWeather(data))
+      .then((data) => {
+        setWeather(data);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -34,16 +54,25 @@ function App() {
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
         fetch(url)
           .then((res) => res.json())
-          .then((data) => setWeather(data))
+          .then((data) => {
+            setWeather(data);
+          })
           .catch((err) => console.log(err));
       },
       (error) => console.log(error)
     );
-  }, [API_KEY]);
+  }, []);
+
+  useEffect(() => {
+    const timerId = setInterval(updateTime, 60000);
+    return () => clearInterval(timerId);
+  }, []);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
+
+  const lastUpdate = weather ? new Date() : null;
 
   return (
     <div className={`App h-screen ${isDarkMode ? "bg-gray-800" : ""}`}>
@@ -102,7 +131,7 @@ function App() {
       <div className="fixed bottom-5 right-5 z-10">
         <button
           className={`p-2 rounded-full bg-blue-500 text-white focus:outline-none focus:shadow-outline-blue ${
-            isDarkMode ? "shadow-md" : ""
+            !isDarkMode ? "shadow-sm shadow-black/50" : ""
           }`}
           onClick={toggleDarkMode}
         >

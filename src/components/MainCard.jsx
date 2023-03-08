@@ -6,12 +6,18 @@ function MainCard({ city, actualTemp, actualHumidity }) {
   const weatherImgUrl =
     "https://images.unsplash.com/photo-1598484033793-fb6a544f4ba2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80";
 
-  const formatDate = (date) => {
-    return new Intl.DateTimeFormat("pt-BR", {
-      dateStyle: "full",
-      timeStyle: "short",
-    }).format(date);
-  };
+    const formatDate = (date) => {
+      const options = {
+        weekday: 'long',
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
+        hour: 'numeric',
+        minute: 'numeric'
+      };
+      const formattedDate = new Intl.DateTimeFormat('pt-BR', options).format(date);
+      return formattedDate;
+    };
 
   return (
     <div className="card w-full h-[250px] bg-white mt-10 rounded-md flex items-center justify-between px-8 shadow-lg">
