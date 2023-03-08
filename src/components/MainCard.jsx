@@ -22,8 +22,8 @@ function MainCard({ city, temperature, humidity, icon, condition }) {
   };
 
   return (
-    <div className="card w-full h-[250px] bg-white mt-10 rounded-md flex items-center justify-between px-8 shadow-lg">
-      <div className="-mr-10">
+    <div className="card w-full h-[250px] bg-white mt-10 rounded-md flex items-center px-8 shadow-lg">
+      <div className="">
         <img
           width={250}
           className="rounded-md"
@@ -32,7 +32,7 @@ function MainCard({ city, temperature, humidity, icon, condition }) {
           title={`${city} weather`}
         />
       </div>
-      <div className="flex flex-col gap-12 relative">
+      <div className="flex flex-col gap-12 relative flex-1 ml-10">
         <div className="content flex items-center gap-4">
           <div className="flex items-center gap-8">
             <h2 className="text-7xl self-end text-gray-800">{city}</h2>
@@ -40,9 +40,9 @@ function MainCard({ city, temperature, humidity, icon, condition }) {
               {temperature !== null ? `${Number(temperature).toFixed(1)}°` : "--"}
               <span className="text-3xl font-semibold text-gray-500">C</span>
             </p>
-            <div className="absolute -right-24 bottom-6 brightness-75">
+            <div className="relative top-6">
               <img
-                width={180}
+                width={120}
                 src={iconImgUrl}
                 alt=""
               />
