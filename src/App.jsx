@@ -111,6 +111,7 @@ function App() {
               </p>
             ) : weather?.cod === 200 ? (
               <MainCard
+                city={weather.name}
                 temperature={weather.main.temp}
                 humidity={weather.main.humidity}
                 condition={weather.weather[0].main}
