@@ -40,9 +40,9 @@ function MainCard({ city, temperature, humidity, icon, condition }) {
               {temperature !== null ? `${Number(temperature).toFixed(1)}°` : "--"}
               <span className="text-3xl font-semibold text-gray-500">C</span>
             </p>
-            <div className="relative top-6">
+            <div className="absolute right-16 brightness-75">
               <img
-                width={120}
+                width={150}
                 src={iconImgUrl}
                 alt=""
               />
